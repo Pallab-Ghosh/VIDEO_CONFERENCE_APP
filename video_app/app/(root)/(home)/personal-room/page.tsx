@@ -2,7 +2,11 @@ import React from 'react'
 
 const PersonalRoompage = () => {
   return (
-    <div>PersonalRoompage</div>
+    <section className=' flex size-full flex-col gap-10 text-white'>
+        <h1 className= 'text-2xl font-semibold'>
+           PersonalRoompage
+        </h1>
+  </section>
   )
 }
 
