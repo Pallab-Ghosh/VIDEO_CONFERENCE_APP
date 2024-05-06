@@ -2,7 +2,7 @@
 import React from 'react'
 import {SidebarRoutes } from './SidebarRoutes'
 
-const All_Routes =[
+export const All_Routes =[
     {
         label :'Home',
         src : '/',
@@ -37,7 +37,7 @@ export const Sidebar = () => {
 
   return (
     <aside className='stick min-h-screen max-sm:hidden lg:w-[264px] justify-start'>
-      <div className=' mt-7 pt-8 flex flex-col gap-8 h-full'>
+      <div className='mt-10 pt-10 flex flex-col gap-8 h-full'>
         {
            All_Routes.map((route)=>(
             <SidebarRoutes
