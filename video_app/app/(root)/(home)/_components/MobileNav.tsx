@@ -11,7 +11,7 @@ import { SidebarRoutes } from './SidebarRoutes'
 
 const MobileNav = () => {
   return (
-    <section className='w-full max-w-[264px]'>
+    <section className='w-full max-w-[264px] sm:hidden'>
          <Sheet>
       <SheetTrigger asChild>
         <Image src='/icons/hamburger.svg' alt='close' height={36} width={36} className=' cursor-pointer sm:' />
