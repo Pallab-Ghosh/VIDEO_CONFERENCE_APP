@@ -2,8 +2,22 @@
   @tailwind components;
   @tailwind utilities;
 
+  
+  @layer utilities {
+    .flex-center{
+      @apply flex justify-center items-center
+    }
+
+    .flex-between{
+       @apply flex justify-between items-center
+    }
+  }
+  
+  html,body,
   :root{
+    height:100%;
     overflow-y: hidden;
+
   }
 
   @layer base {

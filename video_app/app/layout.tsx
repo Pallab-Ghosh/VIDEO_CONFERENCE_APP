@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +16,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider appearance={{
+      layout:{
+        logoImageUrl : '/public/icons/yoom.svg',
+        socialButtonsVariant :'iconButton'
+      },
+       /* variables:{
+       colorText :'white',
+       colorPrimary:'#0E78F9',
+       colorBackground :'#1c1f2e',
+       colorInputBackground :'#252a41',
+       colorInputText :'#fff'
+      } */
+      }}>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-dark-1`}> {children} </body>
     </html>
+    </ClerkProvider>
   );
 }
