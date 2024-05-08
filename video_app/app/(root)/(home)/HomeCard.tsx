@@ -7,13 +7,14 @@ type HomeCardProps = {
     bgcolor : string,
     Imagesrc : string,
     h2text   : string,
-    ptext    : string
+    ptext    : string,
+    handleClick : ()=>void
 }
-const HomeCard = ({bgcolor , Imagesrc , h2text , ptext}:HomeCardProps) => {
+const HomeCard = ({bgcolor , Imagesrc , h2text , ptext , handleClick}:HomeCardProps) => {
 
   return (
      
-         <div className={cn('px-4 py-6 rounded-xl w-full xl:max-w-[370px] min-h-[260px] cursor-pointer flex flex-col',bgcolor)} onClick={()=>alert('add meetings')}>
+         <div className={cn('px-4 py-6 rounded-xl w-full xl:max-w-[370px] min-h-[260px] cursor-pointer flex flex-col',bgcolor)} onClick={handleClick}>
              <div className='flex bg-stone-400 w-10 h-10 justify-center rounded-lg'>
                    <Image src={Imagesrc} height={27} width={27} alt='icon' className=' rounded-lg'/>
              </div>
