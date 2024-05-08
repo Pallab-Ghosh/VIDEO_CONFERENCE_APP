@@ -21,13 +21,13 @@ export default function RootLayout({
         logoImageUrl : '/public/icons/yoom.svg',
         socialButtonsVariant :'iconButton'
       },
-       /* variables:{
-       colorText :'white',
-       colorPrimary:'#0E78F9',
-       colorBackground :'#1c1f2e',
+        variables:{
+       colorText :'black',
+       colorTextSecondary:'white',
+       colorPrimary:'#2F3037',
        colorInputBackground :'#252a41',
        colorInputText :'#fff'
-      } */
+      } 
       }}>
     <html lang="en">
       <body className={`${inter.className} bg-dark-1`}> {children} </body>
