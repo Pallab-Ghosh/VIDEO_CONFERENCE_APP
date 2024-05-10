@@ -5,13 +5,18 @@ import { useUser } from '@clerk/nextjs'
 import { Call, useStreamVideoClient } from '@stream-io/video-react-sdk'
 import { PlusSquare } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { useToast } from './ui/use-toast'
+import { ToastAction } from './ui/toast'
+
 
 
 type Meeting_type =  'IsJoinMeeting' | 'IsInstantMeeting' | 'IsScheduleMeeting' | undefined;
 
 const MeetingTypeList = () => {
+
+    const { toast } = useToast()
 
     const [MeetingState ,SetMeetingState]= useState<Meeting_type>();
     const router = useRouter();
@@ -22,7 +27,9 @@ const MeetingTypeList = () => {
       description: '',
       link : ''
     })
-    const [calldetails , setcalldetails] = useState<Call>()
+    const [calldetails , setcalldetails] = useState<Call>();
+    
+    const new_date_time = `${values.dateTime.getDay()}/${values.dateTime.getMonth()}/${values.dateTime.getFullYear()}  ${values.dateTime.getHours()}:${values.dateTime.getMinutes()}:${values.dateTime.getSeconds()}`
 
     const handleClick = async()=>{
       if(!client || !user)
@@ -30,6 +37,11 @@ const MeetingTypeList = () => {
        
       try
        {
+          if(!values.dateTime)
+            {
+              toast({title : 'Please select a date and time'});
+            }
+
           const id = crypto.randomUUID();
           const call = client.call('default', id);
 
@@ -39,24 +51,20 @@ const MeetingTypeList = () => {
           const description = values.description || 'Instant Meeting'
 
           await call.getOrCreate({
-            data: {
-               starts_at : startsAt,
-               custom:{
-                description : description
-               }
-            },
-          });
-          setcalldetails(call);
+            data: {  starts_at : startsAt, custom:{ description : description }  }, });
+            setcalldetails(call);
 
           if(!values.description)
             {
-                router.push(`/meeting/${call.id}`)
+              router.push(`/meeting/${call.id}`);
+              toast({title: " Creating a Meeting Call",description: new_date_time, action: (<ToastAction altText="Goto schedule to undo" onClick={()=>router.push('/')}>Go Back</ToastAction>),})
             }
       
        } 
 
       catch (error) {
-        
+         console.log(error);
+         toast({title:'Failed to create a Meeting'})
       }
 
       
