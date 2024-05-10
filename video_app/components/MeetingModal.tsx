@@ -32,7 +32,7 @@ export function MeetingModal({IsOpen , OnClose , title , buttonText , handleClic
                     }
                       <p className={cn(" text-center font-bold text-lg leading-[42px]",clasName)}>{title}</p>
                         {children}
-                      <Button type="submit" className=" w-full bg-blue-600 focus-visible:ring-0 focus-visible:ring-offset-0" onClick={handleClick}>
+                      <Button className=" w-full bg-blue-600 focus-visible:ring-0 focus-visible:ring-offset-0" onClick={handleClick}>
                         {buttonText  || 'Schedule Meeting'}
                       </Button>
               </div>
