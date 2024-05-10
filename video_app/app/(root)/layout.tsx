@@ -1,3 +1,4 @@
+import StreamVideoProvider from '@/provider/StreamClientProvider'
 import React from 'react'
 
 
@@ -6,8 +7,11 @@ type ApplayoutProps = {
 }
 const Applayout = ({children}:ApplayoutProps) => {
   return (
+   
     <main>
-     {children}
+      <StreamVideoProvider>
+         {children}
+      </StreamVideoProvider>
     </main>
   )
 }
