@@ -14,6 +14,8 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
     
      const [isMicCamOn , setisMicCamOn] = useState(false)
      const call = useCall();
+     const { useCameraState } = useCallStateHooks();
+     const { camera, isMute } = useCameraState();
 
     if(!call) throw new Error('No call is found');
 
@@ -31,14 +33,21 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
 
         }
       
-    }, [isMicCamOn, call?.camera , call?.microphone])
+    }, [isMicCamOn])
 
   return (
     <div className='h-screen flex w-full flex-col items-center justify-center gap-3 text-white px-2'>
         <h1 className=' text-2xl font-bold'>Meeting Preview</h1>
-         <VideoPreview/>
+          
+          {
+           !isMute? <VideoPreview/>:(
+             <div className=' h-52 rounded-lg sm:w-96 w-full bg-dark-1 border-2 border-zinc-200 flex justify-center items-center text-white'>
+                No Preview Available
+             </div>
+           )
+          }
           <label>  { !isMicCamOn ? 'join the Camera and Microphone': 'Off the Camera and Microphone'}</label>
-          <input  checked={isMicCamOn}   type='checkbox'  onChange={(e)=>setisMicCamOn(e.target.checked)}  />
+          <input  checked={isMicCamOn}   type='checkbox'  onChange={(e)=>setisMicCamOn(e.target.checked)} style={{backgroundColor:'greenyellow'}}  />
           <Button onClick={()=>setIsSetupComplete(true)}  className=' bg-lime-500'>
              Join the Meeting
           </Button>
