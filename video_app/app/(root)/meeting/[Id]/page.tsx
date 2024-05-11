@@ -1,6 +1,12 @@
- 
+'use client' 
+import { useUser } from '@clerk/nextjs'
+import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk'
 import { redirect } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
+import MeetingSetup from '../_components/MeetingSetup'
+import MeetingRoom from '../_components/MeetingRoom'
+import { useGetCallById } from '@/hooks/useGetCallById'
+import { Loading } from '@/components/Loading'
 
 type MeetingIdpageProps = {
     params:{
@@ -10,9 +16,23 @@ type MeetingIdpageProps = {
 
 const MeetingIdpage = ({params}:MeetingIdpageProps) => {
 
+    const {user , isLoaded} = useUser();
+    const [issetupComplete , setIsSetupComplete] = useState(false)
+
+    const {isCallLoading ,call } = useGetCallById(params.Id)
+
+     if(!isLoaded || isCallLoading) return <Loading/>
 
   return (
-    <div>meeting id page {params.Id} </div>
+    <main className='h-screen  w-full'>
+         <StreamCall call={call}>
+            <StreamTheme>
+               {
+                !issetupComplete ? <MeetingSetup setIsSetupComplete = {setIsSetupComplete}/> : <MeetingRoom/>
+               }
+            </StreamTheme>
+         </StreamCall>
+     </main>
   )
 }
 
