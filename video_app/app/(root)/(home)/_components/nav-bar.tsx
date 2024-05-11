@@ -22,8 +22,10 @@ export const Navbar = () => {
 
           <div className='flex flex-1 justify-end'>
               <div className='flex gap-5'>
-                  <div className=' mt-5'><MobileNav/></div>
-                  <SignedIn><UserButton/></SignedIn>
+                  <div className='mt-5'><MobileNav/></div>
+                  <SignedIn>
+                    <UserButton/>
+                  </SignedIn>
               </div>
           </div>
       </nav>
