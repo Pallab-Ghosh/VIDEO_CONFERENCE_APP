@@ -15,19 +15,24 @@ const VideoOffPreview = () => {
 
    const IsMicrophoneMute = useMicrophoneMute();
    const call = useCall();
-   
-   console.log('IsMicrophoneMute' , IsMicrophoneMute)
+
+ 
   return (
 
-    <div className='relative mt-10 h-60 rounded-lg sm:w-96 w-full bg-dark-1 border-2 border-zinc-200   items-center text-white'>
-        <div className=' left-32 absolute bottom-9 flex items-center justify-center gap-6 bg-red-600 w-16 rounded-full h-14 '>
-             <CameraOff  height={30} width={30} onClick={()=>call?.camera.enable()} /> 
-        </div>
+    <div className=' pt-24 justify-center  flex flex-col h-60 rounded-lg sm:w-[520px] w-screen ml-2   bg-dark-1 border-2 border-zinc-200   items-center text-white'>
+        
+        <p className=' mb-14 text-white text-center text-lg font-bold'>No Preview Available</p>
 
-        <div className={cn(' absolute bottom-9 right-28 flex items-center justify-center gap-6  w-16 rounded-full h-14',IsMicrophoneMute && 'bg-red-600' , !IsMicrophoneMute && 'bg-transparent'  )}>
-            {
-                !IsMicrophoneMute ? <Mic2  height={30} width={30} onClick={()=>call?.microphone.disable()} /> : <MicOff  height={30} width={30} onClick={()=>call?.microphone.enable()} />  
-            } 
+        <div className=' flex gap-2 mb-8'>
+          <div className='flex items-center justify-center flex-col  bg-red-600 w-16 rounded-full h-14 '>
+                <CameraOff  height={30} width={30} onClick={()=>call?.camera.enable()} /> 
+            </div>
+
+            <div className={cn('flex items-center justify-center gap-6  w-16 rounded-full h-14',IsMicrophoneMute && 'bg-red-600' , !IsMicrophoneMute && 'bg-transparent'  )}>
+                {
+                    !IsMicrophoneMute ? <Mic2  height={30} width={30} onClick={()=>call?.microphone.disable()} /> : <MicOff  height={30} width={30} onClick={()=>call?.microphone.enable()} />  
+                } 
+            </div>
         </div>
           
     </div>
