@@ -22,11 +22,14 @@ const MeetingTypeList = () => {
     const router = useRouter();
     const user = useUser();
     const client = useStreamVideoClient();
+    const [scheduleMeeting , setscheduleMeeting] = useState(false)
+
     const[values , setvalues] = useState({
       dateTime : new Date(),
       description: '',
       link : ''
     })
+
     const [calldetails , setcalldetails] = useState<Call>();
     
     const new_date_time = `${values.dateTime.getDay()}/${values.dateTime.getMonth()}/${values.dateTime.getFullYear()}  ${values.dateTime.getHours()}:${values.dateTime.getMinutes()}:${values.dateTime.getSeconds()}`
@@ -37,6 +40,7 @@ const MeetingTypeList = () => {
        
       try
        {
+          setscheduleMeeting(true)
           if(!values.dateTime)
             {
               toast({title : 'Please select a date and time'});
@@ -45,7 +49,7 @@ const MeetingTypeList = () => {
           const id = crypto.randomUUID();
           const call = client.call('default', id);
 
-          if(!call)throw new Error('Call not successfully created');
+          if(!call) throw new Error('Call not successfully created');
           
           const startsAt    = values.dateTime.toISOString() || new Date(Date.now()).toISOString();
           const description = values.description || 'Instant Meeting'
@@ -58,6 +62,7 @@ const MeetingTypeList = () => {
             {
               router.push(`/meeting/${call.id}`);
               toast({title: " Creating a Meeting Call",description: new_date_time, action: (<ToastAction altText="Goto schedule to undo" onClick={()=>router.push('/')}>Go Back</ToastAction>),})
+             setscheduleMeeting(false)
             }
       
        } 
@@ -105,6 +110,7 @@ const MeetingTypeList = () => {
              title = "Start an Instant Meeting"
              buttonText = "Start Meeting"
              handleClick={handleClick}
+             scheduleMeeting ={scheduleMeeting}
             />
 
     </section>
