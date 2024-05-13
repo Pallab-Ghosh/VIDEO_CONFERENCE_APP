@@ -14,10 +14,11 @@ type MeetingModalProps = {
     image?     : string
     buttonIcon? : string
     clasName?   : string
+    scheduleMeeting: boolean
 }
 
 
-export function MeetingModal({IsOpen , OnClose , title , buttonText , handleClick , image , children , buttonIcon , clasName}:MeetingModalProps) {
+export function MeetingModal({IsOpen , OnClose , title , buttonText ,scheduleMeeting, handleClick , image , children , buttonIcon , clasName}:MeetingModalProps) {
 
   return (
     <Dialog open={IsOpen} onOpenChange={OnClose}>
@@ -32,7 +33,7 @@ export function MeetingModal({IsOpen , OnClose , title , buttonText , handleClic
                     }
                       <p className={cn(" text-center font-bold text-lg leading-[42px]",clasName)}>{title}</p>
                         {children}
-                      <Button className=" w-full bg-blue-600 focus-visible:ring-0 focus-visible:ring-offset-0" onClick={handleClick}>
+                      <Button  disabled={scheduleMeeting} className=" w-full bg-blue-600 focus-visible:ring-0 focus-visible:ring-offset-0" onClick={handleClick}>
                         {buttonText  || 'Schedule Meeting'}
                       </Button>
               </div>
