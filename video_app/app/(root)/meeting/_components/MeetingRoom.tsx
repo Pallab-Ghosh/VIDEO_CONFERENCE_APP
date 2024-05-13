@@ -9,18 +9,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu"
 import { LayoutList } from 'lucide-react'
+import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
+
+type callLayoutGrid = 'grid' | 'speaker-left' | 'speaker-right' | 'bottom'
 
 
-type callLayoutGrid = 'grid' | 'speaker-left' | 'speaker-right'
-
-
+type Checked = DropdownMenuCheckboxItemProps["checked"]
 
 const MeetingRoom = () => {
 
    const [layout , setlayout] = useState<callLayoutGrid>('speaker-left')
    const[showParticipants , setShowParticipants] = useState(false)
+   const [showStatus, setShowStatus] = useState<Checked>(false)
    const router = useRouter();
 
    const CallLayout = ()=>{
@@ -67,20 +70,20 @@ const MeetingRoom = () => {
 
                     <DropdownMenuContent className=' border-dark-1 bg-dark-1 text-white'>
                       <DropdownMenuLabel>Select Layout</DropdownMenuLabel>
-                       {
-                       ['default','grid' , 'speaker-left' , 'speaker-right']
-                       .map((item, index)=>(
-                          <div key={index}>
-                                 <DropdownMenuItem className=' cursor-pointer' onClick={()=>setlayout(item as callLayoutGrid)}>
-                                    {item}
-                                 </DropdownMenuItem>
-                          </div>
-                       ))
-                         
-                       }
-                        
+                       
+                       { ['default','grid' , 'speaker-left' , 'speaker-right']
+                        .map((item, index)=>(
+                           
+                            <DropdownMenuCheckboxItem
+                              checked={layout === item}
+                              onCheckedChange={()=>setlayout(item as callLayoutGrid)}
+                            >
+                               {item}
+                            </DropdownMenuCheckboxItem>
+                        ))
+}
                     </DropdownMenuContent>
-                </DropdownMenu>
+                </DropdownMenu>               
 
               </div>
     </section>
