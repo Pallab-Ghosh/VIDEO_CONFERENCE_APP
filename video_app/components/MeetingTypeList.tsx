@@ -40,14 +40,19 @@ const MeetingTypeList = () => {
        
       try
        {
+        
           setscheduleMeeting(true)
           if(!values.dateTime)
             {
               toast({title : 'Please select a date and time'});
+              return;
             }
-
+          
+            alert('kk')
           const id = crypto.randomUUID();
+          
           const call = client.call('default', id);
+          
 
           if(!call) throw new Error('Call not successfully created');
           
@@ -62,7 +67,7 @@ const MeetingTypeList = () => {
             {
               router.push(`/meeting/${call.id}`);
               toast({title: " Creating a Meeting Call",description: new_date_time, action: (<ToastAction altText="Goto schedule to undo" onClick={()=>router.push('/')}>Go Back</ToastAction>),})
-             setscheduleMeeting(false)
+              
             }
       
        } 
@@ -71,7 +76,10 @@ const MeetingTypeList = () => {
          console.log(error);
          toast({title:'Failed to create a Meeting'})
       }
-
+      
+      finally{
+        setscheduleMeeting(false)
+      }
       
     }
 
