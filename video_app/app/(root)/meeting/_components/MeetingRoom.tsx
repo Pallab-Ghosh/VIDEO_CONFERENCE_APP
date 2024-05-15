@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils'
 import { CallControls, CallParticipantsList, CallStatsButton, PaginatedGridLayout, SpeakerLayout } from '@stream-io/video-react-sdk'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React, { useState } from 'react'
 import {
   DropdownMenu,
@@ -15,6 +15,7 @@ import { LayoutList, Users } from 'lucide-react'
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import EndCallButton from './End-call-button'
 
 type callLayoutGrid = 'grid' | 'speaker-left' | 'speaker-right' | 'bottom'
 
@@ -27,7 +28,10 @@ const MeetingRoom = () => {
    const[showParticipants , setShowParticipants] = useState(false)
    const [showStatus, setShowStatus] = useState<Checked>(false)
    const router = useRouter();
+   const params = useSearchParams();
+   const isPersonalRoom = !!params.get('personal')
 
+   
    const CallLayout = ()=>{
     switch (layout) {
       case 'grid':
@@ -55,16 +59,16 @@ const MeetingRoom = () => {
                         <CallLayout/>
                     </div>
                 
-                  <div className={cn('h-[calc(100vh-86px)]  lg:absolute lg:right-0  hidden ml-2' ,{'show-block' :showParticipants })}>
+                  <div className={cn('h-screen  lg:absolute lg:right-0  hidden ml-2 ' ,{'show-block' :showParticipants })}>
                         <CallParticipantsList onClose={()=>setShowParticipants(false)}  />
                     </div>
                     
               </div>
              
 
-              <div className='fixed bottom-0 flex  w-full items-center justify-center gap-5 '>
+              <div className='fixed bottom-0 flex  w-full items-center justify-center gap-5 flex-wrap'>
              
-                  <CallControls onLeave={()=>router.push('/')}/>
+                     <CallControls onLeave={()=>router.push('/')}/>
                   <DropdownMenu>
 
                       <div className=' flex items-center'>
@@ -96,6 +100,8 @@ const MeetingRoom = () => {
                             <Users size={20} className=' text-white' />
                        </div>
                   </button>
+
+                   {!isPersonalRoom && <EndCallButton/>}
               </div>
     </section>
   )
