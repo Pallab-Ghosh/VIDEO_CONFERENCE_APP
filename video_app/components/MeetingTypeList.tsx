@@ -36,7 +36,6 @@ const MeetingTypeList = () => {
    
     
     const Meeting_Url=`${process.env.NEXT_PUBLIC_URL}/meeting/${calldetails?.id}`
-    console.log('MEETING_URL',Meeting_Url)
 
     const handleClick = async()=>{
 
