@@ -1,8 +1,16 @@
 import React from 'react'
 import { Sidebar } from './_components/Sidebar'
 import { Navbar } from './_components/nav-bar'
+import { Metadata } from 'next';
  
 
+export const metadata: Metadata = {
+  title: "YOOM",
+  description: "Video Calling App",
+  icons :{
+    icon :'/icons/logo.svg'
+  }
+};
 
 
 type HomelayoutProps = {
