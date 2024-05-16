@@ -22,7 +22,7 @@ export function MeetingModal({IsOpen , OnClose , title , buttonText ,MeetingCrea
 
   return (
     <Dialog open={IsOpen} onOpenChange={OnClose}>
-          <DialogContent className="max-w-[550px] w-full flex-col gap-6 border-none bg-dark-1 px-6 py-9 text-white" onClick={handleClick}>
+          <DialogContent className="max-w-[550px] w-full flex-col gap-6 border-none bg-dark-1 px-6 py-9 text-white">
               <div className=" flex flex-col gap-6">
                     {
                       image && (
@@ -33,7 +33,8 @@ export function MeetingModal({IsOpen , OnClose , title , buttonText ,MeetingCrea
                     }
                       <p className={cn(" text-center font-bold text-lg leading-[42px]",className)}>{title}</p>
                         {children}
-                      <Button  disabled={MeetingCreating} className=" w-full bg-blue-600 focus-visible:ring-0 focus-visible:ring-offset-0" onClick={handleClick}>
+                      <Button  disabled={MeetingCreating} className=" w-full bg-blue-600 focus-visible:ring-0 focus-visible:ring-offset-0" 
+                      onClick={handleClick}>
                       {
                           buttonIcon && 
                           (

@@ -124,11 +124,12 @@
   }
   
   .str-video__participant-list {
-    background-color: #1c1f2e;
+    background-color:rgba(72, 52, 52, 0.215);
     padding: 10px;
     border-radius: 10px;
     color: white;
     height: 100%;
+    overflow:hidden
   }
   
   .str-video__call-controls__button {
