@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import VideoOffPreview from './VideoPreview';
 import { cn } from '@/lib/utils';
 import { useMicrophoneMute } from '@/hooks/useMicrophone';
+import { Loading } from '@/components/Loading';
 
 
 
@@ -29,7 +30,7 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
    
 
     useEffect(()=>{
-         console.log('run')
+    
         if(isMicCamOn)
         {
             call?.camera.disable();
@@ -45,10 +46,13 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
     }, [isMicCamOn , call?.camera , call?.microphone]) 
 
   return (
-    <div className='  h-screen flex w-full flex-col items-center justify-center gap-3  text-white '>
+    <div className='h-screen flex  max-w-screen flex-col items-center justify-center gap-3  text-white '>
                 
                 <h2 className=' text-white sm:text-2xl font-bold'> Meeting Preview</h2>
-                <VideoPreview  />
+                
+                  <VideoPreview/>
+                
+               
                 <div className="flex h-16 items-center justify-center gap-3">
                     <label className="flex items-center justify-center gap-2 font-medium">
                       <input  type="checkbox"  checked={isMicCamOn} onChange={(e) => setisMicCamOn(e.target.checked)} />
@@ -56,7 +60,11 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
                     </label>
                     <DeviceSettings />
               </div>
-            <Button className="rounded-md bg-green-500 px-4 py-2.5"  onClick={() => { call.join(); setIsSetupComplete(true); }}>
+            <Button className="rounded-md bg-green-500 px-4 py-2.5"  onClick={() => { 
+                call.join(); 
+                setIsSetupComplete(true);
+               }}
+               >
               Join meeting
             </Button>
                                  

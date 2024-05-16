@@ -3,7 +3,6 @@ import Image from 'next/image'
 import React from 'react'
 
 
-type HomeCardProps = {
     bgcolor : string,
     Imagesrc : string,
     h2text   : string,
