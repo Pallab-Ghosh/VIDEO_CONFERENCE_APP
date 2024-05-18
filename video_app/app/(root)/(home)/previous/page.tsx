@@ -1,4 +1,5 @@
-import React from 'react'
+import CallList from '@/components/CallList'
+
 
 const Previouspage = () => {
   return (
@@ -6,6 +7,7 @@ const Previouspage = () => {
       <h1 className= 'text-2xl font-semibold'>
          Previouspage
       </h1>
+      <CallList calltype ="ended"/>
     </section>
   )
 }
