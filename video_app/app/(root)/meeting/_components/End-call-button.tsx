@@ -21,7 +21,6 @@ const EndCallButton = () => {
     const handleClick=async()=>{
        await call.endCall();
        router.push('/');
-
     }
 
   return (
