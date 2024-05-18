@@ -7,6 +7,7 @@ import { Call, CallRecording } from '@stream-io/video-react-sdk'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import MeetingCard from './meeting-card'
+import { Loading } from './Loading'
 
  
 
@@ -20,6 +21,11 @@ const CallList = ({calltype}:CallListProps) => {
     const [recordings, setRecordings] = useState<CallRecording[]>([]);
     const {endedCalls , upcomingCalls , recordingdata , loading} = useGetCall();
     
+
+     if(loading)return <Loading/>
+
+
+
     const handle_call_type = ()=>{
        switch(calltype)
        {
