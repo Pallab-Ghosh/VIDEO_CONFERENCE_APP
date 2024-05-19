@@ -5,7 +5,7 @@
 import { useGetCall } from '@/hooks/useGetCall'
 import { Call, CallRecording } from '@stream-io/video-react-sdk'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MeetingCard from './meeting-card'
 import { Loading } from './Loading'
 
@@ -22,8 +22,7 @@ const CallList = ({calltype}:CallListProps) => {
     const {endedCalls , upcomingCalls , recordingdata , loading} = useGetCall();
     
 
-     if(loading)return <Loading/>
-
+   
 
 
     const handle_call_type = ()=>{
@@ -60,11 +59,29 @@ const CallList = ({calltype}:CallListProps) => {
         }
       }
 
+      const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+      
+       
+
+      useEffect(()=>{
+          const GetRecordingsData = async()=>{
+                const data =  recordingdata.map((call)=>call?.queryRecordings() ?? [])
+                const ResolvedRecordings = await Promise.all(data)
+                const RecordingsData = ResolvedRecordings.filter((call)=>call.recordings.length > 0)
+                const AllRecordings = RecordingsData.flatMap((call)=>call.recordings)
+                setRecordings(AllRecordings)
+          }
+ 
+          GetRecordingsData(); 
+           
+
+      },[calltype , recordingdata])
+
      const calls = handle_call_type();
      const msgs = handle_No_call_message();
 
 
-
+     if(loading)return <Loading/>
 
   return (
      <div className=' grid grid-cols-1 xl:grid-cols-2 gap-5'>
@@ -78,21 +95,20 @@ const CallList = ({calltype}:CallListProps) => {
                     icon = { calltype === 'ended' ? '/icons/previous.svg' :
                        calltype === 'upcoming' ? '/icons/upcoming.svg' : '/icons/recordings.svg' }
 
-                    title = {(meeting as Call ).state.custom.description.substring(0,26) || 'No Description' }
+                    title = {(meeting as Call)?.state?.custom.description.substring(0,26) ||    (meeting as CallRecording).filename?.substring(0, 20) ||
+                       'No Description' }
 
-                    date  = {meeting.state.startsAt.toLocaleString() || meeting.start_time.toLocaleString()}
+                    date  = {meeting.state?.startsAt?.toLocaleString() || meeting.start_time.toLocaleString()}
 
                     isPreviousMeeting = { calltype === 'ended'}
 
-                    buttonIcon1 = {calltype === 'recordings' ? '/public/icons/play.svg' : undefined }
+                    buttonIcon1 = {calltype === 'recordings' ? '/icons/play.svg' : undefined }
 
-                    handleClick = {calltype === 'recordings' ? ()=>router.push(`/meeting/${meeting.url}`) : 
-                     ()=>router.push(`/meeting/${meeting.id}`)
+                    handleClick = {calltype === 'recordings'  ? () => router.push(`${(meeting as CallRecording).url}`) :
+                     () => router.push(`/meeting/${(meeting as Call).id}`)
                      }
                      
-                    link = {calltype === 'recordings' ? meeting.url :
-                     `${process.env.NEXT_PUBLIC_URL}/meeting/${meeting.id}`
-                    }
+                    link = {calltype === 'recordings' ? (meeting as CallRecording).url : `${process.env.NEXT_PUBLIC_URL}/meeting/${meeting.id}`   }
                     
                     buttonText = {calltype === 'recordings' ? 'Play' : '  Start Meeting'}
 
