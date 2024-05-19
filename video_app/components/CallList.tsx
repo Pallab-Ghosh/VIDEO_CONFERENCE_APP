@@ -94,7 +94,7 @@ const CallList = ({calltype}:CallListProps) => {
                      `${process.env.NEXT_PUBLIC_URL}/meeting/${meeting.id}`
                     }
                     
-                    buttonText = {calltype === 'recordings' ? 'Play' : 'start'}
+                    buttonText = {calltype === 'recordings' ? 'Play' : '  Start Meeting'}
 
                  />
              )
