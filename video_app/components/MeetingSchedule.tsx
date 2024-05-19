@@ -8,7 +8,7 @@ type props={
         description: string
         link:string
     },
-    setvalues :React.Dispatch<React.SetStateAction<{ dateTime: Date; description: string;link: string; }>>
+    setvalues :React.Dispatch<React.SetStateAction<{ dateTime: Date; description: string , link: string; }>>
 }
 
 const MeetingSchedule = ({values , setvalues} : props) => {
@@ -21,7 +21,7 @@ const MeetingSchedule = ({values , setvalues} : props) => {
                         </label>
 
                         <Textarea 
-                        required
+                        
                         className="border-none bg-dark-3  text-black focus-visible:ring-0 focus-visible:ring-offset-0"
                         onChange={(e) => setvalues({ ...values, description: e.target.value })}
                         />

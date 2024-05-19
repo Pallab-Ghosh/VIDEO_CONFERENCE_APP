@@ -86,7 +86,7 @@ const CallList = ({calltype}:CallListProps) => {
 
                     buttonIcon1 = {calltype === 'recordings' ? '/public/icons/play.svg' : undefined }
 
-                    hanldeClick = {calltype === 'recordings' ? ()=>router.push(`/meeting/${meeting.url}`) : 
+                    handleClick = {calltype === 'recordings' ? ()=>router.push(`/meeting/${meeting.url}`) : 
                      ()=>router.push(`/meeting/${meeting.id}`)
                      }
                      
