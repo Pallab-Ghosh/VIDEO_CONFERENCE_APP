@@ -17,7 +17,7 @@ import MeetingSchedule from './MeetingSchedule'
 
 
 
-type Meeting_type =  'IsJoinMeeting' | 'IsInstantMeeting' | 'IsScheduleMeeting' | undefined;
+export type Meeting_type =  'IsJoinMeeting' | 'IsInstantMeeting' | 'IsScheduleMeeting' | undefined;
 
 const MeetingTypeList = () => {
 
@@ -138,14 +138,14 @@ const MeetingTypeList = () => {
                  {
                     !calldetails ? 
                       (
-                        <MeetingModal 
-                         IsOpen = {MeetingState === 'IsScheduleMeeting'}  
-                         OnClose={() => SetMeetingState(undefined)}
-                         title="Create Meeting" 
-                         handleClick={handleClick}
-                         >
-                           <MeetingSchedule values={values} setvalues={setvalues} />
-                      </MeetingModal>
+                          <MeetingModal 
+                          IsOpen = {MeetingState === 'IsScheduleMeeting'}  
+                          OnClose={() => SetMeetingState(undefined)}
+                          title="Create Meeting" 
+                          handleClick={handleClick}
+                          >
+                            <MeetingSchedule values={values} setvalues={setvalues} />
+                        </MeetingModal>
                       
                       )
                         :
@@ -159,6 +159,9 @@ const MeetingTypeList = () => {
                           handleClick={handleCreateMeeting}
                           image="/icons/checked.svg"
                           buttonIcon="/icons/copy.svg"
+                          MeetingState={MeetingState}
+                          calldetails={calldetails}
+                          refreshClickHandler={()=>{window.location.reload()}}
                           >
                           
                             </MeetingModal>
