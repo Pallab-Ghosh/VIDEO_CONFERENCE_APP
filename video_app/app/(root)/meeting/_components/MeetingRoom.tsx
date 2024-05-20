@@ -106,7 +106,7 @@ const MeetingRoom = () => {
                             <Users size={20} className=' text-white' />
                        </div>
                   </button>
-                  <MyToggleTranscriptionButton/>
+                 
                    {!isPersonalRoom && <EndCallButton/>}
                    
               </div>
