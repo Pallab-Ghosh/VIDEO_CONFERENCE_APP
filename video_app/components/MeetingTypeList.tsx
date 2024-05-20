@@ -90,7 +90,7 @@ const MeetingTypeList = () => {
 
      
 
-    const handleCreateMeeting = ()=>{
+      const handleCreateMeeting = ()=>{
         navigator.clipboard.writeText(Meeting_Url);
         toast({title : 'Link copied'})
     }
