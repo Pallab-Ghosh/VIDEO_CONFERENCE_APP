@@ -14,6 +14,7 @@ import ReactDatePicker from 'react-datepicker';
 import { Textarea } from './ui/textarea'
 import MeetingSchedule from './MeetingSchedule'
 import { Input } from './ui/input'
+import { link } from 'fs'
 
 
 
@@ -30,7 +31,7 @@ const MeetingTypeList = () => {
     const client = useStreamVideoClient()//stream client
     const [MeetingCreating , setMeetingCreating] = useState(false) // for button disabled 
     const [calldetails , setcalldetails] = useState<Call>(); // call details
-    const [InputUrl , SetInputUrl] = useState('');
+    
    
 
     const[values , setvalues] = useState({  dateTime : new Date(),  description: '',  link : ''})
@@ -178,9 +179,9 @@ const MeetingTypeList = () => {
                     title = "Join a Meeting"
                     buttonText = "Join Meeting"
                     MeetingCreating ={MeetingCreating}
-                    handleClick={()=>router.push(InputUrl)}
+                    handleClick={()=>router.push(values.link)}
                     >
-                       <Input type='url' value={InputUrl} onChange={(e)=>SetInputUrl(e.target.value)} className=' text-black rounded-lg' placeholder='Please provide meeting url' />
+                       <Input type='url' value={values.link} onChange={(e)=>setvalues({...values , link:e.target.value})} className='border-none bg-slate-800 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-lg' placeholder='Please provide meeting url' />
                     </MeetingModal>
 
     </section> 
