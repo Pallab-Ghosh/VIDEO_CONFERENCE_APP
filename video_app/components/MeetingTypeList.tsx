@@ -13,6 +13,7 @@ import { ToastAction } from './ui/toast'
 import ReactDatePicker from 'react-datepicker';
 import { Textarea } from './ui/textarea'
 import MeetingSchedule from './MeetingSchedule'
+import { Input } from './ui/input'
 
 
 
@@ -29,6 +30,7 @@ const MeetingTypeList = () => {
     const client = useStreamVideoClient()//stream client
     const [MeetingCreating , setMeetingCreating] = useState(false) // for button disabled 
     const [calldetails , setcalldetails] = useState<Call>(); // call details
+    const [InputUrl , SetInputUrl] = useState('');
    
 
     const[values , setvalues] = useState({  dateTime : new Date(),  description: '',  link : ''})
@@ -167,12 +169,21 @@ const MeetingTypeList = () => {
                             </MeetingModal>
                         
                         )
-
-
-
                }
 
-    </section>
+
+                   <MeetingModal
+                    IsOpen = {MeetingState === 'IsJoinMeeting'}
+                    OnClose = {()=>SetMeetingState(undefined)}
+                    title = "Join a Meeting"
+                    buttonText = "Join Meeting"
+                    MeetingCreating ={MeetingCreating}
+                    handleClick={()=>router.push(InputUrl)}
+                    >
+                       <Input type='url' value={InputUrl} onChange={(e)=>SetInputUrl(e.target.value)} className=' text-black rounded-lg' placeholder='Please provide meeting url' />
+                    </MeetingModal>
+
+    </section> 
   )
 }
 
