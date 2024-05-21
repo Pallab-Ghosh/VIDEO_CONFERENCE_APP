@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import EndCallButton from './End-call-button'
 import { Loading } from '@/components/Loading'
 import { MyToggleTranscriptionButton } from './call-transcription'
+import { MyPermissionRequestNotifications } from './MyPermissionRequests'
 
 
 type callLayoutGrid = 'grid' | 'speaker-left' | 'speaker-right' | 'bottom'
@@ -59,6 +60,10 @@ const MeetingRoom = () => {
 
   return (
     <section className=' h-screen relative w-full overflow-hidden pt-4 text-white'>
+                <div className='h-16 flex flex-wrap ml-20'>
+                  <MyPermissionRequestNotifications/>
+                </div>
+                 
               <div className='relative flex size-full items-center justify-center'>
                     <div className='flex size-full max-w-[1000px] items-center'>
                         <CallLayout/>
@@ -67,12 +72,11 @@ const MeetingRoom = () => {
                   <div className={cn('h-screen  lg:absolute lg:right-0  hidden ml-2 ' ,{'show-block' :showParticipants })}>
                         <CallParticipantsList onClose={()=>setShowParticipants(false)}  />
                     </div>
-                    
               </div>
+                       
              
-
               <div className='fixed bottom-0 flex  w-full items-center justify-center gap-5 flex-wrap'>
-             
+                   
                      <CallControls onLeave={()=>router.push('/')}/>
                      <DropdownMenu>
 
@@ -106,10 +110,11 @@ const MeetingRoom = () => {
                             <Users size={20} className=' text-white' />
                        </div>
                   </button>
-                 
+
                    {!isPersonalRoom && <EndCallButton/>}
-                   
+                     
               </div>
+             
     </section>
   )
 }
