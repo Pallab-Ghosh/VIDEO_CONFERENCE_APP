@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { CallControls,TranscriptionSettingsModeEnum, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, PermissionRequestEvent, SpeakerLayout, StreamVideoEvent, useCall, useCallStateHooks } from '@stream-io/video-react-sdk'
+import { CallControls,TranscriptionSettingsModeEnum, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, PermissionRequestEvent, SpeakerLayout, StreamVideoEvent, useCall, useCallStateHooks, PermissionRequests } from '@stream-io/video-react-sdk'
 import { redirect, useRouter, useSearchParams } from 'next/navigation'
 import  { useCallback, useEffect, useState } from 'react'
 import {DropdownMenu,DropdownMenuContent,  DropdownMenuItem,  DropdownMenuLabel,  DropdownMenuSeparator,  DropdownMenuTrigger,  DropdownMenuCheckboxItem,} from "@/components/ui/dropdown-menu"
@@ -60,9 +60,8 @@ const MeetingRoom = () => {
 
   return (
     <section className=' h-screen relative w-full overflow-hidden pt-4 text-white'>
-                <div className='h-16 flex flex-wrap ml-20'>
-                  <MyPermissionRequestNotifications/>
-                </div>
+                 <PermissionRequests/>
+              
                  
               <div className='relative flex size-full items-center justify-center'>
                     <div className='flex size-full max-w-[1000px] items-center'>
