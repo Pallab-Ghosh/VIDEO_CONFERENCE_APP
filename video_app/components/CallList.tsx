@@ -64,6 +64,7 @@ const CallList = ({calltype}:CallListProps) => {
        
 
       useEffect(()=>{
+
           const GetRecordingsData = async()=>{
                 const data =  recordingdata.map((call)=>call?.queryRecordings() ?? [])
                 const ResolvedRecordings = await Promise.all(data)
@@ -72,10 +73,12 @@ const CallList = ({calltype}:CallListProps) => {
                 setRecordings(AllRecordings)
           }
  
-          GetRecordingsData(); 
+         if(calltype === 'recordings')  
+           GetRecordingsData(); 
            
 
       },[calltype , recordingdata])
+      
 
      const calls = handle_call_type();
      const msgs = handle_No_call_message();
