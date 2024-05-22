@@ -12,6 +12,7 @@ import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import { useToast } from '@/components/ui/use-toast';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 
  const MyFeedbackForm = () => {
@@ -22,6 +23,7 @@ import Image from 'next/image';
   const [message, setMessage] = useState<string>('');
   const {user} = useUser();
   const {toast}= useToast()
+  const router = useRouter();
 
   const handleSubmitFeedback = useCallback(() => {
     
@@ -88,7 +90,7 @@ import Image from 'next/image';
                             Submit
                           </Button>
 
-                          <Button className=' w-40 bg-blue-600 rounded-full' onClick={()=>{}}>
+                          <Button className=' w-40 bg-blue-600 rounded-full' onClick={()=>router.push('/')}>
                             Home
                           </Button>
                       </div>
