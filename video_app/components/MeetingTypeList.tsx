@@ -64,7 +64,7 @@ const MeetingTypeList = () => {
           const startsAt    = values.dateTime.toISOString() || new Date(Date.now()).toISOString();
           const description = values.description || 'Instant Meeting'
 
-          await call.getOrCreate({  data: {  starts_at : startsAt, custom:{ description : description }  }, });
+          await call.getOrCreate({data: {  starts_at : startsAt, custom:{ description : description }} , notify:true});
           setcalldetails(call);
         
 

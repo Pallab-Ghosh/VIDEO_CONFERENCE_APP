@@ -14,7 +14,7 @@ const HomeCard = ({bgcolor , Imagesrc , h2text , ptext , handleClick}:HomeCardPr
 
   return (
      
-         <div className={cn('px-4 py-6 rounded-xl w-full xl:max-w-[370px] min-h-[260px] cursor-pointer flex flex-col',bgcolor)} 
+         <div className={cn('px-4 py-6 rounded-xl w-full xl:max-w-[370px] min-h-[260px] md:h-[150px] cursor-pointer flex flex-col',bgcolor)} 
           onClick={handleClick}
           >
              <div className='flex bg-slate-500 w-10 h-10 justify-center rounded-lg'>

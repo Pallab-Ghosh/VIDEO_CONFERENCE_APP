@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { CallControls,TranscriptionSettingsModeEnum, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, PermissionRequestEvent, SpeakerLayout, StreamVideoEvent, useCall, useCallStateHooks, PermissionRequests } from '@stream-io/video-react-sdk'
+import { CallControls,TranscriptionSettingsModeEnum, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, PermissionRequestEvent, SpeakerLayout, StreamVideoEvent, useCall, useCallStateHooks, PermissionRequests, useCalls } from '@stream-io/video-react-sdk'
 import { redirect, useRouter, useSearchParams } from 'next/navigation'
 import  { useCallback, useEffect, useState } from 'react'
 import {DropdownMenu,DropdownMenuContent,  DropdownMenuItem,  DropdownMenuLabel,  DropdownMenuSeparator,  DropdownMenuTrigger,  DropdownMenuCheckboxItem,} from "@/components/ui/dropdown-menu"
@@ -11,6 +11,7 @@ import EndCallButton from './End-call-button'
 import { Loading } from '@/components/Loading'
 import { MyToggleTranscriptionButton } from './call-transcription'
 import { MyPermissionRequestNotifications } from './MyPermissionRequests'
+import CallRequest from './call-request'
 
 
 type callLayoutGrid = 'grid' | 'speaker-left' | 'speaker-right' | 'bottom'
@@ -32,6 +33,12 @@ const MeetingRoom = () => {
    const {useCallCallingState} = useCallStateHooks();
    const callingState = useCallCallingState();
    const call = useCall()
+   const calls = useCalls()
+
+   const incomingCalls = calls.filter((call) =>  call.isCreatedByMe === false && call.state.callingState === CallingState.RINGING,
+  );
+
+   const [incomingCall] = incomingCalls;
   
      if(callingState !== CallingState.JOINED)
       return <Loading/> 
@@ -61,7 +68,7 @@ const MeetingRoom = () => {
   return (
     <section className=' h-screen relative w-full overflow-hidden pt-4 text-white'>
                  <PermissionRequests/>
-              
+                  
                  
               <div className='relative flex size-full items-center justify-center'>
                     <div className='flex size-full max-w-[1000px] items-center'>
@@ -111,6 +118,7 @@ const MeetingRoom = () => {
                   </button>
 
                    {!isPersonalRoom && <EndCallButton/>}
+                   
                      
               </div>
              
