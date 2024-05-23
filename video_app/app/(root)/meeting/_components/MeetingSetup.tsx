@@ -29,7 +29,7 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
     if(!call) throw new Error('No call is found');
    
 
-    useEffect(()=>{
+   /*  useEffect(()=>{
     
         if(isMicCamOn)
         {
@@ -43,23 +43,29 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
 
         }
       
-    }, [isMicCamOn , call?.camera , call?.microphone]) 
+    }, [isMicCamOn , call?.camera , call?.microphone])  */
 
   return (
     <div className='h-screen flex  max-w-screen flex-col items-center justify-center gap-3  text-white '>
                 
                 <h2 className=' text-white sm:text-2xl font-bold'> Meeting Preview</h2>
                 
-                  <VideoPreview  DisabledVideoPreview={VideoOffPreview} />
+                  <VideoPreview DisabledVideoPreview={VideoOffPreview} />
                 
                
-                <div className="flex h-16 items-center justify-center gap-3">
-                    <label className="flex items-center justify-center gap-2 font-medium">
-                      <input  type="checkbox"  checked={isMicCamOn} onChange={(e) => setisMicCamOn(e.target.checked)} />
-                        Join with mic and camera off
-                    </label>
-                    <DeviceSettings />
-              </div>
+                   <div className="flex h-16 items-center justify-center gap-3">
+                          <label className="flex items-center justify-center gap-2 font-medium">
+                            <input  type="checkbox"  checked={isMicCamOn} onChange={(e) => setisMicCamOn(e.target.checked)} />
+                              Join with mic and camera off
+                          </label>
+
+
+                        <DeviceSettings />
+                     </div> 
+
+                     
+        
+
             <Button className="rounded-md bg-green-500 px-4 py-2.5"  onClick={() => { 
                 call.join(); 
                 setIsSetupComplete(true);
