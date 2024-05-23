@@ -50,7 +50,7 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
                 
                 <h2 className=' text-white sm:text-2xl font-bold'> Meeting Preview</h2>
                 
-                  <VideoPreview/>
+                  <VideoPreview  DisabledVideoPreview={VideoOffPreview} />
                 
                
                 <div className="flex h-16 items-center justify-center gap-3">
