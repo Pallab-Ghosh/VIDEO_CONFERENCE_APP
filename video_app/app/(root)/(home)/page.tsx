@@ -33,7 +33,7 @@ const upcoming_meeting_time = upcomingCalls[0]?.state.startsAt?.toLocaleString()
                        ):
                        (
                         <div className=' text-white-400 sm:h-6 text-center font-bold text-base'> 
-                           Hey Folks!! What's next ?
+                           Hey Folks !! What's next ?
                         </div>
                        )
                      }
@@ -53,7 +53,7 @@ const upcoming_meeting_time = upcomingCalls[0]?.state.startsAt?.toLocaleString()
       </div>
        
         <MeetingTypeList/>
-          <div className=' flex justify-center w-full bg-dark-2'>
+          <div className=' flex justify-center w-full bg-dark-2 '>
               <ImageSlider/>
           </div>
     </section>

@@ -7,13 +7,13 @@ import Image from "next/image"
 
 export function ImageSlider() {
   return (
-    <Carousel className="sm:w-[500px] w-full flex justify-center max-w-xs sm:max-w-lg">
+    <Carousel className="sm:w-[500px] w-full flex justify-center max-w-xs sm:max-w-lg ">
             <CarouselContent>
                 {
                     image_slider_datas.map((data , index) => (
                         <CarouselItem key={index}>
                                 <div className="p-1">
-                                    <Card className="bg-dark-2 border-black">
+                                    <Card className="bg-dark-2 border-dark-2">
                                         <CardContent className="flex aspect-square items-center justify-center">
                                           {
                                              <div className=" flex flex-col items-center p-4 ">
