@@ -12,6 +12,7 @@ import { Loading } from '@/components/Loading'
 import { MyToggleTranscriptionButton } from './call-transcription'
 import { MyPermissionRequestNotifications } from './MyPermissionRequests'
 import CallRequest from './call-request'
+import { Transcription } from './Transcription';
 
 
 type callLayoutGrid = 'grid' | 'speaker-left' | 'speaker-right' | 'bottom'
@@ -30,10 +31,10 @@ const MeetingRoom = () => {
 
    const isPersonalRoom = !!params.get('personal')
 
-   const {useCallCallingState} = useCallStateHooks();
+   const {useCallCallingState , useParticipants} = useCallStateHooks();
    const callingState = useCallCallingState();
    const call = useCall()
-  // const calls = useCalls()
+    
 
    const  pathname = usePathname();
    const id = pathname.slice(9)
@@ -118,7 +119,8 @@ const MeetingRoom = () => {
                             <Users size={20} className=' text-white' />
                        </div>
                   </button>
-
+                     <Transcription/>
+                  
                    {!isPersonalRoom && <EndCallButton/>}
                    
                      
