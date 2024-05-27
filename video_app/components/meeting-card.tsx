@@ -6,6 +6,8 @@ import { Button } from "./ui/button"
 import { useToast } from "./ui/use-toast"
 import { avatarImages } from "@/constants"
 import { cn } from "@/lib/utils"
+import { StreamVideoParticipant, useCallStateHooks } from "@stream-io/video-react-sdk"
+import { useGetCallById } from "@/hooks/useGetCallById"
 
  
 type MeetingCardProps = {
@@ -18,20 +20,22 @@ type MeetingCardProps = {
     handleClick ?      : ()=>void
     link               : string
     buttonText?        : string 
+    callid ?            : string
+     
 }
 
 
- const MeetingCard = ({ icon , title , date , isPreviousMeeting , buttonIcon1 , buttonText , handleClick , link}:MeetingCardProps) => {
+ const MeetingCard = ({ icon , title , date , isPreviousMeeting , buttonIcon1 , buttonText , handleClick , link ,callid }:MeetingCardProps) => {
   
     const { toast } = useToast();
-
-
+  
+ 
     const handleCreateMeeting = ()=>{
       navigator.clipboard.writeText(link);
       toast({title : 'Link copied'})
   }
 
-
+ 
     return (
       <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 xl:max-w-[568px]">
           
@@ -52,11 +56,12 @@ type MeetingCardProps = {
                         <Image  key={index}  src={img}  alt="attendee"  width={40}  height={40} className={cn("rounded-full", { absolute: index > 0 })}
                           style={{ top: 0, left: index * 28 }}
                         />
-                      ))
+                      )) 
+
                     }
-                      <div className="flex-center absolute left-[136px] size-10 rounded-full border-[5px] border-dark-3 bg-dark-4">
+                       <div className="flex-center absolute left-[136px] size-10 rounded-full border-[5px] border-dark-3 bg-dark-4">
                         +5
-                      </div>
+                      </div> 
               </div>
               
                 {

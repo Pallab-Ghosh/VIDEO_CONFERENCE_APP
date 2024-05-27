@@ -1,12 +1,13 @@
 'use client'
 import { Button } from '@/components/ui/button';
-import { DeviceSettings, ToggleVideoPreviewButton, ToggleVideoPublishingButton, useCall, useCallStateHooks, VideoPreview } from '@stream-io/video-react-sdk'
+import {  DeviceSettings, ToggleVideoPreviewButton, ToggleVideoPublishingButton, useCall, useCallStateHooks, VideoPreview } from '@stream-io/video-react-sdk'
 import { Camera, CameraIcon, CameraOff, Mic2, MicOff, Video } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import VideoOffPreview from './VideoPreview';
 import { cn } from '@/lib/utils';
 import { useMicrophoneMute } from '@/hooks/useMicrophone';
 import { Loading } from '@/components/Loading';
+import { useUser } from '@clerk/nextjs';
 
 
 
@@ -24,6 +25,8 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
      const { isMute } = useCameraState();
 
      const IsMicrophoneMute = useMicrophoneMute()
+     const userdata = useUser()
+    console.log(userdata.user?.imageUrl)
  
 
     if(!call) throw new Error('No call is found');
@@ -37,7 +40,7 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
                   {
                     !isMute && (
                         <div className=' absolute mt-52'>
-
+                      
                             <div className=' flex gap-5 mb-8'>
                               {
                               isMute ? (
@@ -60,6 +63,7 @@ const MeetingSetup = ({setIsSetupComplete}:MeetingSetupProps) => {
                             </div>
                       </div>
                     )
+                    
                   }
                
                <div className=' flex justify-center mt-20 gap-1'>
