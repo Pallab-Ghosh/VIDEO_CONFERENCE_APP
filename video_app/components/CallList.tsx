@@ -74,14 +74,16 @@ const CallList = ({calltype}:CallListProps) => {
           }
  
          if(calltype === 'recordings')  
-           GetRecordingsData(); 
+           GetRecordingsData()
            
 
       },[calltype , recordingdata])
-      
+
 
      const calls = handle_call_type();
      const msgs = handle_No_call_message();
+
+     
 
 
      if(loading)return <Loading/>
@@ -101,7 +103,9 @@ const CallList = ({calltype}:CallListProps) => {
                     title = {(meeting as Call)?.state?.custom.description.substring(0,26) ||    (meeting as CallRecording).filename?.substring(0, 20) ||
                        'No Description' }
 
-                    date  = {meeting.state?.startsAt?.toLocaleString() || meeting.start_time.toLocaleString()}
+                    callid ={(meeting as Call)?.id}
+
+                      date  = {meeting.state?.startsAt?.toLocaleString() || meeting.start_time.toLocaleString()}
 
                     isPreviousMeeting = { calltype === 'ended'}
 
