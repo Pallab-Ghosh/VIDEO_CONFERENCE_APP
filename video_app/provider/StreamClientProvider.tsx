@@ -3,9 +3,11 @@
 import { tokenProvider } from '@/action/stream.action';
 
 import { useUser } from '@clerk/nextjs';
-import {  StreamVideo,  StreamVideoClient,} from '@stream-io/video-react-sdk';
+import {  StreamI18nProvider, StreamVideo,  StreamVideoClient,} from '@stream-io/video-react-sdk';
  
 import { ReactNode, useEffect, useState } from 'react';
+import { StreamChat } from 'stream-chat';
+
  
 import {Loading}from '@/components/Loading';
 
@@ -33,6 +35,8 @@ import {Loading}from '@/components/Loading';
                     image: user?.imageUrl },
                     tokenProvider:tokenProvider
             })  
+
+          
         
             setVidoClient(client)
 
@@ -49,4 +53,5 @@ import {Loading}from '@/components/Loading';
     )
   }
 
-export default StreamVideoProvider
+  
+ export default  StreamVideoProvider

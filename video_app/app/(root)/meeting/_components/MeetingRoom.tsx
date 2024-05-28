@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { CallControls,TranscriptionSettingsModeEnum, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, PermissionRequestEvent, SpeakerLayout, StreamVideoEvent, useCall, useCallStateHooks, PermissionRequests, useCalls } from '@stream-io/video-react-sdk'
+import { CallControls,TranscriptionSettingsModeEnum, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, PermissionRequestEvent, SpeakerLayout, StreamVideoEvent, useCall, useCallStateHooks, PermissionRequests, useCalls, RecordingInProgressNotification } from '@stream-io/video-react-sdk'
 import { redirect, useRouter, useSearchParams, usePathname } from 'next/navigation';
 import  { useCallback, useEffect, useState } from 'react'
 import {DropdownMenu,DropdownMenuContent,  DropdownMenuItem,  DropdownMenuLabel,  DropdownMenuSeparator,  DropdownMenuTrigger,  DropdownMenuCheckboxItem,} from "@/components/ui/dropdown-menu"
@@ -13,6 +13,7 @@ import { MyToggleTranscriptionButton } from './call-transcription'
 import { MyPermissionRequestNotifications } from './MyPermissionRequests'
 import CallRequest from './call-request'
 import { Transcription } from './Transcription';
+
 
 
 type callLayoutGrid = 'grid' | 'speaker-left' | 'speaker-right' | 'bottom'
@@ -85,8 +86,10 @@ const MeetingRoom = () => {
                        
              
               <div className='fixed bottom-0 flex  w-full items-center justify-center gap-5 flex-wrap'>
-                   
-                     <CallControls onLeave={()=>router.push(`/meeting/${id}/review`)}/>
+                     <RecordingInProgressNotification text='Recording in progress...' >
+                        <CallControls onLeave={()=>router.push(`/meeting/${id}/review`)}/>
+                    </RecordingInProgressNotification>
+                     
                      <DropdownMenu>
 
                       <div className=' flex items-center'>
@@ -119,6 +122,7 @@ const MeetingRoom = () => {
                             <Users size={20} className=' text-white' />
                        </div>
                   </button>
+                    
                      <Transcription/>
                   
                    {!isPersonalRoom && <EndCallButton/>}

@@ -1,13 +1,20 @@
+
 'use client';
 
+import { tokenProvider } from '@/action/stream.action';
 import { Button } from '@/components/ui/button';
+import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
+import { channel } from 'diagnostics_channel';
 import { useEffect, useRef, useState } from 'react';
+ 
 
-console.log('process.env', process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
+ 
+
 
 export const Transcription = () => {
   const recognitionRef = useRef<SpeechRecognition>();
+  
 
   const [isActive, setIsActive] = useState<boolean>(false);
   const [text, setText] = useState<string>('');
@@ -18,6 +25,10 @@ export const Transcription = () => {
 
   const availableVoices = voices?.filter(({ lang }) => lang === language);
   const activeVoice = availableVoices?.find(({ name }) => name.includes('Google')) || availableVoices?.find(({ name }) => name.includes('Luciana')) || availableVoices?.[0];
+  const {user , isLoaded} = useUser();
+
+ 
+
 
   useEffect(() => {
     const voices = window.speechSynthesis.getVoices();
@@ -75,8 +86,10 @@ export const Transcription = () => {
     };
 
     recognitionRef.current.onresult = async function(event) {
+
       if (event.results.length > 0) {
         const result = event.results[event.resultIndex];
+
         if (result.isFinal) {
           const transcript = result[0].transcript;
           setText(transcript);
@@ -86,8 +99,10 @@ export const Transcription = () => {
             const translationData = res.data.data.translations[0].translatedText;
             console.log('translationData', translationData);
             setTranslation(translationData);
+            
+             
             speak(translationData)
-          }
+          } 
           catch (error) {
             console.error('Error during translation:', error);
           }
@@ -99,22 +114,35 @@ export const Transcription = () => {
         }
       }
     };
+
+    recognitionRef.current.onerror = function(event) {
+      console.error('Error occurred in recognition:', event.error);
+    };
+
+    recognitionRef.current.onnomatch = function() {
+      console.log('No match found');
+    };
+
     recognitionRef.current.start();
   };
+
+
 
 
   function speak(text: string) {
     const utterance = new SpeechSynthesisUtterance(text);
     
     if ( activeVoice ) {
+      window.speechSynthesis.cancel()
       utterance.voice = activeVoice;
     };
-
+  
     window.speechSynthesis.speak(utterance);
-  }
+  } 
 
   return (
     <div>
+      <p>{text}</p>
       <p>{translation}</p>
       <Button onClick={handle_Click}>
         {isActive ? 'Stop Transcribing' : 'Start Transcribing'}
@@ -122,3 +150,11 @@ export const Transcription = () => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
