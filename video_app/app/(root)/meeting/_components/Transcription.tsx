@@ -17,20 +17,20 @@ export const Transcription = () => {
   
 
   const [isActive, setIsActive] = useState<boolean>(false);
-  const [text, setText] = useState<string>('');
-  const [translation, setTranslation] = useState<string>('');
+  const [text, setText] = useState<string[]>([]);
+  //const [translation, setTranslation] = useState<string>('');
 
-  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
+  //const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [language, setLanguage] = useState('en-US');
 
-  const availableVoices = voices?.filter(({ lang }) => lang === language);
-  const activeVoice = availableVoices?.find(({ name }) => name.includes('Google')) || availableVoices?.find(({ name }) => name.includes('Luciana')) || availableVoices?.[0];
+ // const availableVoices = voices?.filter(({ lang }) => lang === language);
+ // const activeVoice = availableVoices?.find(({ name }) => name.includes('Google')) || availableVoices?.find(({ name }) => name.includes('Luciana')) || availableVoices?.[0];
   const {user , isLoaded} = useUser();
 
  
 
 
-  useEffect(() => {
+/*   useEffect(() => {
     const voices = window.speechSynthesis.getVoices();
     if (Array.isArray(voices) && voices.length > 0) {
       setVoices(voices);
@@ -42,14 +42,14 @@ export const Transcription = () => {
         setVoices(voices);
       };
     }
-  }, []);
+  }, []); */
 
   const handle_Click = () => {
     if (isActive) {
       recognitionRef.current?.stop();
       setIsActive(false);
-      setText('');
-      setTranslation('');
+      setText([]);
+    //  setTranslation('');
       return;
     }
 
@@ -67,51 +67,49 @@ export const Transcription = () => {
 
     recognitionRef.current.onstart = function() {
       setIsActive(true);
-      setText('');
-      setTranslation('');
+      setText([]);
+     // setTranslation('');
     };
 
     recognitionRef.current.onend = function() {
       if (isActive) {
-        setText('');
-        setTranslation('');
+        setText([]);
+       // setTranslation('');
         recognitionRef.current?.start();
       }
     };
 
     recognitionRef.current.onspeechstart = function() {
-      setText('');
-      setTranslation('');
+      setText([]);
+     // setTranslation();
       console.log('Speech has been detected');
     };
 
     recognitionRef.current.onresult = async function(event) {
 
       if (event.results.length > 0) {
-        const result = event.results[event.resultIndex];
+        const transcript = Array.from(event.results).map(result => result[0]).map(result => result.transcript)
+          setText(transcript)
 
-        if (result.isFinal) {
-          const transcript = result[0].transcript;
-          setText(transcript);
 
-          try {
+       /*    try {
             const res = await axios.post(`https://translation.googleapis.com/language/translate/v2?key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`, { q: transcript, target: language });
             const translationData = res.data.data.translations[0].translatedText;
             console.log('translationData', translationData);
             setTranslation(translationData);
             
              
-            speak(translationData)
+           // speak(translationData)
           } 
           catch (error) {
             console.error('Error during translation:', error);
-          }
+          } */
 
           setTimeout(() => {
-            setText('');
-            setTranslation('');
+            setText([]);
+           // setTranslation('');
           }, 3000);
-        }
+        
       }
     };
 
@@ -129,7 +127,7 @@ export const Transcription = () => {
 
 
 
-  function speak(text: string) {
+/*   function speak(text: string) {
     const utterance = new SpeechSynthesisUtterance(text);
     
     if ( activeVoice ) {
@@ -138,12 +136,12 @@ export const Transcription = () => {
     };
   
     window.speechSynthesis.speak(utterance);
-  } 
+  }  */
 
   return (
     <div>
-      <p>{text}</p>
-      <p>{translation}</p>
+     
+      <p>{text.map((t)=>t)}</p>
       <Button onClick={handle_Click}>
         {isActive ? 'Stop Transcribing' : 'Start Transcribing'}
       </Button>

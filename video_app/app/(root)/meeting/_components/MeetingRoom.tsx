@@ -123,7 +123,7 @@ const MeetingRoom = () => {
                        </div>
                   </button>
                     
-                     <Transcription/>
+                    
                   
                    {!isPersonalRoom && <EndCallButton/>}
                    

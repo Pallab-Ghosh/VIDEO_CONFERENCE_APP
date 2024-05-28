@@ -22,6 +22,7 @@ const EndCallButton = () => {
        await call.endCall();
        router.push('/');
     }
+    
 
   return (
     <Button onClick={handleClick} className=' bg-red-500'>
