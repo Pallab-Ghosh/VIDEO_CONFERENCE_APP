@@ -85,5 +85,3 @@ To run this project, you will need to add the following environment variables to
 
 [!Screenshots](https://imagetolink.com/ib/9adqT2Tq8p)
 
-(https://imagetolink.com/ib/l8bUMKpHHf)
-
