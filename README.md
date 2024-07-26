@@ -1,4 +1,4 @@
-
+ 
 # Project Title
 
 YOOM is a cutting-edge web application designed to provide seamless video calling experiences. Built with Next.js and powered by Stream.io, YOOM offers a robust platform for creating, scheduling, and managing video meetings with ease.
@@ -75,13 +75,4 @@ To run this project, you will need to add the following environment variables to
 ## Authors
 
 - [Pallab-Ghosh](https://github.com/Pallab-Ghosh)
-
-
-## Demo
-[!YOOM DEMO](https://media.giphy.com/mediaY2lkPTc5MGI3NjExdWhuOTlpb2QyY2Z5eWFhMmxrOTVrMXFwZTVtaGpid3c1eG53azk5dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BNTnBu4YpufjRNnycJ/giphy.gif)
-
-
-## Screenshots
-
-[!Screenshots](https://imagetolink.com/ib/9adqT2Tq8p)
 
