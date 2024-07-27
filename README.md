@@ -97,13 +97,15 @@ Personal-Room
 
 ## Demo
 https://github.com/user-attachments/assets/4923d4ec-726a-4c2a-b218-5429d473610a
-https://github.com/user-attachments/assets/cead788f-ff27-46d8-8070-df6cf2810e55
+
+https://github.com/user-attachments/assets/d20ecabc-4897-4bb8-9bde-41602111c547
+
+
+
 
 Mobile VIew
-https://github.com/user-attachments/assets/4508fa50-c611-4bad-bbf8-663a9697d352
 
-
-
+https://github.com/user-attachments/assets/315daae3-c3af-4e35-a6e4-0b4b42846f94
 
 
 
